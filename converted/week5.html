@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week 5</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body class="week-content">
+    <h1>Week 5</h1>
+    <p>				238W1A1290</p>
+    <p>Date: 18-08-25</p>
+    <p>Week-5</p>
+    <p>AIM: Write the program in java using Scroll Insensitive ResultSet.</p>
+    <p>Java code:</p>
+    <p>import java.sql.*</p>
+    <p>public class ScrollInsensitiveDemo {</p>
+    <p>    public static void main(String[] args) {</p>
+    <p>        try {</p>
+    <p>            Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);</p>
+    <p>            Connection con = DriverManager.getConnection(</p>
+    <p>                &quot;jdbc:mysql://localhost:3306/college&quot;,</p>
+    <p>                &quot;root&quot;,</p>
+    <p>                &quot;password&quot;</p>
+    <p>            )</p>
+    <p>            Statement st = con.createStatement(</p>
+    <p>                    ResultSet.TYPE_SCROLL_INSENSITIVE,</p>
+    <p>                    ResultSet.CONCUR_READ_ONLY</p>
+    <p>            );</p>
+    <p>            ResultSet rs = st.executeQuery(&quot;SELECT * FROM student&quot;);</p>
+    <p>            System.out.println(&quot;Forward Direction:&quot;);</p>
+    <p>            while (rs.next()) {</p>
+    <p>                System.out.println(rs.getInt(1) + &quot;  &quot; +</p>
+    <p>                                   rs.getString(2) + &quot;  &quot; +</p>
+    <p>                                   rs.getString(3));</p>
+    <p>            }</p>
+    <p>            System.out.println(&quot;\nBackward Direction:&quot;);</p>
+    <p>            while (rs.previous()) {</p>
+    <p>                System.out.println(rs.getInt(1) + &quot;  &quot; +</p>
+    <p>                                   rs.getString(2) + &quot;  &quot; +</p>
+    <p>                                   rs.getString(3));</p>
+    <p>            }</p>
+    <p>            con.close();</p>
+    <p>        } catch (Exception e) {</p>
+    <p>            e.printStackTrace();</p>
+    <p>        }</p>
+    <p>    }</p>
+    <p>}</p>
+    <p>Output:</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>2.AIM: Write the program in java using Scroll Sensitive ResultSet.</p>
+    <p>Java code:</p>
+    <p>import java.sql.*;</p>
+    <p>public class ScrollSensitiveDemo {</p>
+    <p>    public static void main(String[] args) {</p>
+    <p>        try {</p>
+    <p>            Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);</p>
+    <p>            Connection con = DriverManager.getConnection(</p>
+    <p>                &quot;jdbc:mysql://localhost:3306/college&quot;,</p>
+    <p>                &quot;root&quot;,</p>
+    <p>                &quot;password&quot;</p>
+    <p>            );</p>
+    <p>            Statement st = con.createStatement(</p>
+    <p>                    ResultSet.TYPE_SCROLL_SENSITIVE,</p>
+    <p>                    ResultSet.CONCUR_READ_ONLY</p>
+    <p>            );</p>
+    <p>            ResultSet rs = st.executeQuery(&quot;SELECT * FROM student&quot;);</p>
+    <p>            System.out.println(&quot;Forward Direction:&quot;);</p>
+    <p>            while (rs.next()) {</p>
+    <p>                System.out.println(</p>
+    <p>                        rs.getInt(&quot;id&quot;) + &quot;  &quot; +</p>
+    <p>                        rs.getString(&quot;name&quot;) + &quot;  &quot; +</p>
+    <p>                        rs.getString(&quot;email&quot;)</p>
+    <p>                );</p>
+    <p>            }</p>
+    <p>            System.out.println(&quot;\nBackward Direction:&quot;);</p>
+    <p>            while (rs.previous()) {</p>
+    <p>                System.out.println(</p>
+    <p>                        rs.getInt(&quot;id&quot;) + &quot;  &quot; +</p>
+    <p>                        rs.getString(&quot;name&quot;) + &quot;  &quot; +</p>
+    <p>                        rs.getString(&quot;email&quot;)</p>
+    <p>                );</p>
+    <p>            }</p>
+    <p>            con.close();</p>
+    <p>        } catch (Exception e) {</p>
+    <p>            e.printStackTrace();</p>
+    <p>        }</p>
+    <p>    }</p>
+    <p>}</p>
+    <p>&nbsp;</p>
+    <p>Output:</p>
+</body>
+</html>

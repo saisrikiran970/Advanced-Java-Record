@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week 2</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body class="week-content">
+    <h1>Week 2</h1>
+    <p>238W1A1290</p>
+    <p>28-07-25</p>
+    <p>Week-2: JAVA &amp; MSACCESS CONNECTIONS WITHOUT DSN</p>
+    <p>Step 1: Create the Java application file using IDE</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>Step 2: Copy source code to the created java application file.</p>
+    <p>package welcome;</p>
+    <p>&nbsp;</p>
+    <p>import java.sql.*;</p>
+    <p>import java.util.*;</p>
+    <p>public class Welcome{</p>
+    <p>    public static void main(String args[])</p>
+    <p>    {</p>
+    <p>        try</p>
+    <p>     {</p>
+    <p>         Class.forName(&quot;net.ucanaccess.jdbc.UcanaccessDriver&quot;);         </p>
+    <p>          Connection con=DriverManager.getConnection(&quot;jdbc:ucanaccess://D:\\vrsec.accdb&quot;);</p>
+    <p>         Statement st=con.createStatement();</p>
+    <p>&nbsp;</p>
+    <p>     ResultSet rs=st.executeQuery(&quot;select * from it&quot;);</p>
+    <p>         while(rs.next())</p>
+    <p>         {</p>
+    <p>                 System.out.println(&quot;emp Number is:&quot;+rs.getInt(1));</p>
+    <p>                  System.out.println(&quot;emp name is:&quot;+rs.getString(2));</p>
+    <p>         }</p>
+    <p>     }</p>
+    <p>         catch(Exception e)</p>
+    <p>         {</p>
+    <p>             System.out.println(e.getMessage());</p>
+    <p>         }</p>
+    <p>    }</p>
+    <p>}</p>
+    <p>&nbsp;</p>
+    <p>Step 3: Extract the given file and copy the Database to the D drive.</p>
+    <p>&nbsp;</p>
+    <p>Step 4: Add the required JAR file to the project in the IDE.</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>Step 5: Run the project file the IDE.</p>
+    <p>	Output: </p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+</body>
+</html>

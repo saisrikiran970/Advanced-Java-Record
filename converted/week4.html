@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week 4</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body class="week-content">
+    <h1>Week 4</h1>
+    <p>238W1A1290</p>
+    <p>   Date:11-08-25</p>
+    <p>WEEK-4</p>
+    <p>AIM: Write a JDBC program to connect to the database for inserting data into the Student table using callable statement.</p>
+    <p>&nbsp;</p>
+    <p>Create table:</p>
+    <p>DELIMITER $$</p>
+    <p>CREATE PROCEDURE insert_student(</p>
+    <p>    IN sid INT,</p>
+    <p>    IN sname VARCHAR(50),</p>
+    <p>    IN sage INT</p>
+    <p>)</p>
+    <p>BEGIN</p>
+    <p>    INSERT INTO Student(id, name, age)</p>
+    <p>    VALUES (sid, sname, sage);</p>
+    <p>END$$</p>
+    <p>DELIMITER ;</p>
+    <p>&nbsp;</p>
+    <p>Java code</p>
+    <p>import java.sql.*;</p>
+    <p>public class StudentCallableDemo {</p>
+    <p>    public static void main(String[] args) {</p>
+    <p>        Connection con = null;</p>
+    <p>        CallableStatement cstmt = null;</p>
+    <p>        try {</p>
+    <p>            Class.forName(&quot;com.mysql.cj.jdbc.Driver&quot;);</p>
+    <p>            con = DriverManager.getConnection(</p>
+    <p>                    &quot;jdbc:mysql://localhost:3306/yourdatabase&quot;,</p>
+    <p>                    &quot;root&quot;,</p>
+    <p>                    &quot;password&quot;</p>
+    <p>            );</p>
+    <p>            cstmt = con.prepareCall(&quot;{ call insert_student(?, ?, ?) }&quot;);</p>
+    <p>            cstmt.setInt(1, 101);</p>
+    <p>            cstmt.setString(2, &quot;Sai Kiran&quot;);</p>
+    <p>            cstmt.setInt(3, 20);</p>
+    <p>            cstmt.executeUpdate();</p>
+    <p>            System.out.println(&quot;Student record inserted successfully.&quot;);</p>
+    <p>        } catch (Exception e) {</p>
+    <p>            e.printStackTrace();</p>
+    <p>        } finally {</p>
+    <p>            try {</p>
+    <p>                if (cstmt != null) cstmt.close();</p>
+    <p>                if (con != null) con.close();</p>
+    <p>            } catch (SQLException e) {</p>
+    <p>                e.printStackTrace();</p>
+    <p>            }</p>
+    <p>        }  } }</p>
+    <p>Output:</p>
+    <p>&nbsp;</p>
+</body>
+</html>

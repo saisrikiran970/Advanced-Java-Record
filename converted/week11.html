@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week 11</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body class="week-content">
+    <h1>Week 11</h1>
+    <p>238W1A1290</p>
+    <p>Week-11</p>
+    <p>1. Using h2 database</p>
+    <p>Project name: h2db</p>
+    <p>Author.java</p>
+    <p>package com.example.mysqldemo;</p>
+    <p>&nbsp;</p>
+    <p>public class Author {</p>
+    <p>private String firstName;</p>
+    <p>private String lastName;</p>
+    <p>public String getFirstName() {</p>
+    <p>return firstName;</p>
+    <p>}</p>
+    <p>public void setFirstName(String firstName) {</p>
+    <p>this.firstName = firstName;</p>
+    <p>}</p>
+    <p>public String getLastName() {</p>
+    <p>return lastName;</p>
+    <p>}</p>
+    <p>public void setLastName(String lastName) {</p>
+    <p>this.lastName = lastName;</p>
+    <p>}</p>
+    <p>public Author(String firstName, String lastName) {</p>
+    <p>super();</p>
+    <p>this.firstName = firstName;</p>
+    <p>this.lastName = lastName;</p>
+    <p>}</p>
+    <p>}</p>
+    <p>&nbsp;</p>
+    <p>AuthorService</p>
+    <p>package com.example.mysqldemo;</p>
+    <p>import java.util.ArrayList;</p>
+    <p>import java.util.*;</p>
+    <p>import org.slf4j.*;</p>
+    <p>import org.springframework.beans.factory.annotation.Autowired;</p>
+    <p>import org.springframework.jdbc.core.JdbcTemplate;</p>
+    <p>import org.springframework.stereotype.Service;</p>
+    <p>import jakarta.annotation.PostConstruct; </p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>@Service</p>
+    <p>public class AuthorService {</p>
+    <p>private static final Logger log =LoggerFactory.getLogger(AuthorService.class);</p>
+    <p>@Autowired</p>
+    <p>JdbcTemplate jdbcTemplate;</p>
+    <p>@PostConstruct</p>
+    <p>public void postConstruct() {</p>
+    <p>	Author author1=new Author(&quot;Manogna&quot;,&quot;IT&quot;);</p>
+    <p>	Author author2=new Author(&quot;Varshini&quot;,&quot;CSE&quot;);</p>
+    <p>	List &lt;Author&gt; authors = new ArrayList&lt;&gt;();</p>
+    <p>	authors.add(author1);</p>
+    <p>	authors.add(author2);</p>
+    <p>log.info(&quot;Creating tables&quot;);</p>
+    <p>	jdbcTemplate.execute(&quot;DROP TABLE IF EXISTS author&quot;);</p>
+    <p>	jdbcTemplate.execute(&quot;CREATE TABLE author(&quot; + &quot; first_name varchar(255), last_name varchar(255))&quot;);</p>
+    <p>authors.forEach(i-&gt;jdbcTemplate.update(&quot;INSERT INTO author(first_name, last_name) VALUES (?,?)&quot;,i.getFirstName(),i.getLastName()));</p>
+    <p>log.info(&quot;Records Saved&quot;);</p>
+    <p>//retrieve saved records.</p>
+    <p>log.info(&quot;Retrieving records&quot;);</p>
+    <p>authors = jdbcTemplate.query(&quot;select * from author&quot;, (rs, rowNum)-&gt; new Author(rs.getString(&quot;first_name&quot;),rs.getString(&quot;last_name&quot;)));</p>
+    <p>authors.forEach(i -&gt; log.info(i.getFirstName() + &quot; &quot; +i.getLastName()));</p>
+    <p>}</p>
+    <p>} </p>
+    <p>&nbsp;</p>
+    <p>Application.properties:</p>
+    <p>server.port=83</p>
+    <p>spring.application.name=h2db</p>
+    <p>&nbsp;</p>
+    <p># H2 console</p>
+    <p>spring.h2.console.enabled=true</p>
+    <p>spring.h2.console.path=/h2-console</p>
+    <p>&nbsp;</p>
+    <p># Datasource Settings</p>
+    <p>spring.datasource.url=jdbc:h2:mem:testdb</p>
+    <p>spring.datasource.driverClassName=org.h2.Driver</p>
+    <p>spring.datasource.username=sa</p>
+    <p>spring.datasource.password=</p>
+    <p>&nbsp;</p>
+    <p>spring.jpa.hibernate.ddl-auto=none</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>JDBC with MySQL:</p>
+    <p>&nbsp;</p>
+    <p>Employee.java</p>
+    <p>package com.example.demo;</p>
+    <p>&nbsp;</p>
+    <p>import jakarta.persistence.Entity;</p>
+    <p>import jakarta.persistence.Id;</p>
+    <p>&nbsp;</p>
+    <p>@Entity</p>
+    <p>public class Employee {</p>
+    <p>&nbsp;</p>
+    <p>    @Id</p>
+    <p>    private int id;</p>
+    <p>    private String name;</p>
+    <p>    private String department;</p>
+    <p>&nbsp;</p>
+    <p>    public Employee() {}</p>
+    <p>&nbsp;</p>
+    <p>    public Employee(int id, String name, String department) {</p>
+    <p>        this.id = id;</p>
+    <p>        this.name = name;</p>
+    <p>        this.department = department;</p>
+    <p>    }</p>
+    <p>&nbsp;</p>
+    <p>    public int getId() { return id; }</p>
+    <p>    public void setId(int id) { this.id = id; }</p>
+    <p>&nbsp;</p>
+    <p>    public String getName() { return name; }</p>
+    <p>    public void setName(String name) { this.name = name; }</p>
+    <p>&nbsp;</p>
+    <p>    public String getDepartment() { return department; }</p>
+    <p>    public void setDepartment(String department) { this.department = department; }</p>
+    <p>}</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>EmployeeRepository.java</p>
+    <p>package com.example.demo;</p>
+    <p>&nbsp;</p>
+    <p>import org.springframework.data.jpa.repository.JpaRepository;</p>
+    <p>&nbsp;</p>
+    <p>public interface EmployeeRepository extends JpaRepository&lt;Employee, Integer&gt; { }</p>
+    <p>&nbsp;</p>
+    <p>MysqlJdbcDemoApplication.java</p>
+    <p>package com.example.demo;</p>
+    <p>&nbsp;</p>
+    <p>import org.springframework.boot.SpringApplication;</p>
+    <p>import org.springframework.boot.autoconfigure.SpringBootApplication;</p>
+    <p>&nbsp;</p>
+    <p>@SpringBootApplication</p>
+    <p>public class MysqlJdbcDemoApplication {</p>
+    <p>    public static void main(String[] args) {</p>
+    <p>        SpringApplication.run(MysqlJdbcDemoApplication.class, args);</p>
+    <p>        System.out.println(&quot;welcome&quot;);</p>
+    <p>    }</p>
+    <p>}</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>Applications.properties</p>
+    <p>spring.application.name=MysqlJdbcDemo</p>
+    <p>server.port=85</p>
+    <p>&nbsp;</p>
+    <p>spring.datasource.url=jdbc:mysql://localhost:3306/employee_db?useSSL=false&amp;serverTimezone=UTC</p>
+    <p>spring.datasource.username=root</p>
+    <p>spring.datasource.password=</p>
+    <p>&nbsp;</p>
+    <p>spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver</p>
+    <p>&nbsp;</p>
+    <p>spring.jpa.hibernate.ddl-auto=none</p>
+    <p>spring.jpa.show-sql=true</p>
+    <p>&nbsp;</p>
+    <p>spring.sql.init.mode=always</p>
+    <p>spring.jpa.defer-datasource-initialization=true</p>
+    <p>&nbsp;</p>
+    <p>DATABASE</p>
+    <p>&nbsp;</p>
+    <p>Create database employee_db;</p>
+    <p>Use employee_db;</p>
+    <p>CREATE TABLE IF NOT EXISTS employee (</p>
+    <p>    id INT PRIMARY KEY,</p>
+    <p>    name VARCHAR(255),</p>
+    <p>    department VARCHAR(255)</p>
+    <p>&nbsp;</p>
+    <p>);</p>
+    <p>&nbsp;</p>
+    <p>data.sql</p>
+    <p>INSERT INTO employee (id, name, department) VALUES</p>
+    <p>(1, &#x27;Manogna&#x27;, &#x27;IT&#x27;),</p>
+    <p>(2, &#x27;Keerthi’, &#x27;CSE&#x27;),</p>
+    <p>(3, &#x27;Sai&#x27;, &#x27;ECE&#x27;);</p>
+    <p>Pom.xml
+
+&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</p>
+    <p>&lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot; xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;</p>
+    <p>	xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd&quot;&gt;</p>
+    <p>	&lt;modelVersion&gt;4.0.0&lt;/modelVersion&gt;</p>
+    <p>	&lt;parent&gt;</p>
+    <p>		&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</p>
+    <p>		&lt;artifactId&gt;spring-boot-starter-parent&lt;/artifactId&gt;</p>
+    <p>		&lt;version&gt;3.5.7&lt;/version&gt;</p>
+    <p>		&lt;relativePath/&gt; &lt;!-- lookup parent from repository --&gt;</p>
+    <p>	&lt;/parent&gt;</p>
+    <p>	&lt;groupId&gt;com.example&lt;/groupId&gt;</p>
+    <p>	&lt;artifactId&gt;MysqlJdbcDemo&lt;/artifactId&gt;</p>
+    <p>	&lt;version&gt;0.0.1-SNAPSHOT&lt;/version&gt;</p>
+    <p>	&lt;name&gt;MysqlJdbcDemo&lt;/name&gt;</p>
+    <p>	&lt;description&gt;Servlet + HttpSession + JPA + H2 demo&lt;/description&gt;</p>
+    <p>	&lt;url/&gt;</p>
+    <p>	&lt;licenses&gt;</p>
+    <p>		&lt;license/&gt;</p>
+    <p>	&lt;/licenses&gt;</p>
+    <p>	&lt;developers&gt;</p>
+    <p>		&lt;developer/&gt;</p>
+    <p>	&lt;/developers&gt;</p>
+    <p>	&lt;scm&gt;</p>
+    <p>		&lt;connection/&gt;</p>
+    <p>		&lt;developerConnection/&gt;</p>
+    <p>		&lt;tag/&gt;</p>
+    <p>		&lt;url/&gt;</p>
+    <p>	&lt;/scm&gt;</p>
+    <p>	&lt;properties&gt;</p>
+    <p>		&lt;java.version&gt;17&lt;/java.version&gt;</p>
+    <p>	&lt;/properties&gt;</p>
+    <p>	&lt;dependencies&gt;</p>
+    <p>		&lt;dependency&gt;</p>
+    <p>			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</p>
+    <p>			&lt;artifactId&gt;spring-boot-starter-data-jdbc&lt;/artifactId&gt;</p>
+    <p>		&lt;/dependency&gt;</p>
+    <p>		&lt;dependency&gt;</p>
+    <p>			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</p>
+    <p>			&lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</p>
+    <p>		&lt;/dependency&gt;</p>
+    <p>&nbsp;</p>
+    <p>&lt;dependency&gt;</p>
+    <p>    &lt;groupId&gt;mysql&lt;/groupId&gt;</p>
+    <p>    &lt;artifactId&gt;mysql-connector-java&lt;/artifactId&gt;</p>
+    <p>    &lt;version&gt;5.1.49&lt;/version&gt;</p>
+    <p>&lt;/dependency&gt;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>		&lt;dependency&gt;</p>
+    <p>			&lt;groupId&gt;com.mysql&lt;/groupId&gt;</p>
+    <p>			&lt;artifactId&gt;mysql-connector-j&lt;/artifactId&gt;</p>
+    <p>			&lt;scope&gt;runtime&lt;/scope&gt;</p>
+    <p>		&lt;/dependency&gt;</p>
+    <p>		&lt;dependency&gt;</p>
+    <p>			&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</p>
+    <p>			&lt;artifactId&gt;spring-boot-starter-test&lt;/artifactId&gt;</p>
+    <p>			&lt;scope&gt;test&lt;/scope&gt;</p>
+    <p>		&lt;/dependency&gt;</p>
+    <p>	&lt;/dependencies&gt;</p>
+    <p>&nbsp;</p>
+    <p>	&lt;build&gt;</p>
+    <p>		&lt;plugins&gt;</p>
+    <p>			&lt;plugin&gt;</p>
+    <p>				&lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</p>
+    <p>				&lt;artifactId&gt;spring-boot-maven-plugin&lt;/artifactId&gt;</p>
+    <p>			&lt;/plugin&gt;</p>
+    <p>		&lt;/plugins&gt;</p>
+    <p>	&lt;/build&gt;</p>
+    <p>&nbsp;</p>
+    <p>&lt;/project&gt;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>Output:</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+</body>
+</html>

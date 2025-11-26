@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week 6</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body class="week-content">
+    <h1>Week 6</h1>
+    <p>Date: 06-10-2025</p>
+    <p>Roll: 238W1A1290</p>
+    <p>Week-6: Cookies and Sessions</p>
+    <p>Cookies</p>
+    <p>Html:</p>
+    <p>&lt;!doctype html&gt;</p>
+    <p>&lt;html lang=&quot;en&quot;&gt;</p>
+    <p>&lt;head&gt;</p>
+    <p>  &lt;meta charset=&quot;utf-8&quot; /&gt;</p>
+    <p>  &lt;title&gt;Login&lt;/title&gt;</p>
+    <p>&lt;/head&gt;</p>
+    <p>&lt;body&gt;</p>
+    <p>  &lt;h1&gt;Login&lt;/h1&gt;</p>
+    <p>  &lt;form action=&quot;Cookie1&quot; method=&quot;post&quot;&gt;</p>
+    <p>    &lt;div&gt;</p>
+    <p>      &lt;label for=&quot;username&quot;&gt;Username&lt;/label&gt;&lt;br /&gt;</p>
+    <p>      &lt;input id=&quot;username&quot; name=&quot;username&quot; type=&quot;text&quot; /&gt;</p>
+    <p>    &lt;/div&gt;</p>
+    <p>    &lt;div&gt;</p>
+    <p>      &lt;label for=&quot;password&quot;&gt;Password&lt;/label&gt;&lt;br /&gt;</p>
+    <p>      &lt;input id=&quot;password&quot; name=&quot;password&quot; type=&quot;password&quot; /&gt;</p>
+    <p>    &lt;/div&gt;</p>
+    <p>    &lt;div&gt;</p>
+    <p>      &lt;button type=&quot;submit&quot;&gt;Sign in&lt;/button&gt;</p>
+    <p>    &lt;/div&gt;</p>
+    <p>  &lt;/form&gt;</p>
+    <p>&lt;/body&gt;</p>
+    <p>&lt;/html&gt; </p>
+    <p>&nbsp;</p>
+    <p>Cookie1:</p>
+    <p>package com.cookies;</p>
+    <p>import java.io.*;</p>
+    <p>import javax.servlet.*;</p>
+    <p>import javax.servlet.annotation.WebServlet;</p>
+    <p>import javax.servlet.http.*;</p>
+    <p>&nbsp;</p>
+    <p>@WebServlet(&quot;/Cookie1&quot;)</p>
+    <p>public class Cookie1 extends HttpServlet {</p>
+    <p>&nbsp;</p>
+    <p>    @Override</p>
+    <p>    protected void doPost(HttpServletRequest request, HttpServletResponse response)</p>
+    <p>            throws ServletException, IOException {</p>
+    <p>&nbsp;</p>
+    <p>        response.setContentType(&quot;text/html&quot;);</p>
+    <p>        PrintWriter out = response.getWriter();</p>
+    <p>&nbsp;</p>
+    <p>        String n = request.getParameter(&quot;username&quot;);</p>
+    <p>        out.println(&quot;&lt;h2&gt;Welcome &quot; + n + &quot;&lt;/h2&gt;&quot;);</p>
+    <p>        Cookie ck = new Cookie(&quot;uname&quot;, n);</p>
+    <p>        response.addCookie(ck);</p>
+    <p>        out.println(&quot;&lt;form action=&#x27;Cookie2&#x27; method=&#x27;post&#x27;&gt;&quot;);</p>
+    <p>        out.println(&quot;&lt;input type=&#x27;submit&#x27; value=&#x27;Go&#x27;&gt;&quot;);</p>
+    <p>        out.println(&quot;&lt;/form&gt;&quot;);</p>
+    <p>&nbsp;</p>
+    <p>        out.close();</p>
+    <p>    }</p>
+    <p>}</p>
+    <p>Cookie2:</p>
+    <p>import java.io.*;  </p>
+    <p>import javax.servlet.*;  </p>
+    <p>import javax.servlet.annotation.WebServlet;  </p>
+    <p>import javax.servlet.http.*;  </p>
+    <p>&nbsp;</p>
+    <p>@WebServlet(&quot;/Cookie2&quot;)</p>
+    <p>public class Cookie2 extends HttpServlet {  </p>
+    <p>    public void doPost(HttpServletRequest request, HttpServletResponse response){  </p>
+    <p>	try{  	  </p>
+    <p>	    response.setContentType(&quot;text/html&quot;);  </p>
+    <p>	    PrintWriter out = response.getWriter();  </p>
+    <p>&nbsp;</p>
+    <p>	    Cookie ck[]=request.getCookies();  </p>
+    <p>	    out.print(&quot;Hello &quot;+ck[0].getValue());  </p>
+    <p>&nbsp;</p>
+    <p>	    out.close();  </p>
+    <p>&nbsp;</p>
+    <p>	}catch(Exception e){</p>
+    <p>            System.out.println(e);</p>
+    <p>        }  </p>
+    <p>    }  	      </p>
+    <p>}  </p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>Output:</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>	
+
+Sessions</p>
+    <p>Html:</p>
+    <p>&lt;!doctype html&gt;</p>
+    <p>&lt;html lang=&quot;en&quot;&gt;</p>
+    <p>&lt;head&gt;</p>
+    <p>  &lt;meta charset=&quot;utf-8&quot; /&gt;</p>
+    <p>  &lt;title&gt;Login using Session&lt;/title&gt;</p>
+    <p>&lt;/head&gt;</p>
+    <p>&lt;body&gt;</p>
+    <p>  &lt;h1&gt;Login Page (Session Example)&lt;/h1&gt;</p>
+    <p>&nbsp;</p>
+    <p>  &lt;form action=&quot;LoginServlet&quot; method=&quot;post&quot;&gt;</p>
+    <p>    &lt;div&gt;</p>
+    <p>      &lt;label for=&quot;username&quot;&gt;Username:&lt;/label&gt;&lt;br&gt;</p>
+    <p>      &lt;input id=&quot;username&quot; name=&quot;username&quot; type=&quot;text&quot; required&gt;</p>
+    <p>    &lt;/div&gt;</p>
+    <p>&nbsp;</p>
+    <p>    &lt;div&gt;</p>
+    <p>      &lt;label for=&quot;password&quot;&gt;Password:&lt;/label&gt;&lt;br&gt;</p>
+    <p>      &lt;input id=&quot;password&quot; name=&quot;password&quot; type=&quot;password&quot; required&gt;</p>
+    <p>    &lt;/div&gt;</p>
+    <p>    &lt;div&gt;</p>
+    <p>      &lt;button type=&quot;submit&quot;&gt;Login&lt;/button&gt;</p>
+    <p>    &lt;/div&gt;</p>
+    <p>  &lt;/form&gt;</p>
+    <p>&lt;/body&gt;</p>
+    <p>&lt;/html&gt;</p>
+    <p>LoginServlet:</p>
+    <p>package com.session;</p>
+    <p>import java.io.*;</p>
+    <p>import javax.servlet.*;</p>
+    <p>import javax.servlet.annotation.WebServlet;</p>
+    <p>import javax.servlet.http.*;</p>
+    <p>&nbsp;</p>
+    <p>@WebServlet(&quot;/LoginServlet&quot;)</p>
+    <p>public class LoginServlet extends HttpServlet {</p>
+    <p>    @Override</p>
+    <p>    protected void doPost(HttpServletRequest request, HttpServletResponse response)</p>
+    <p>            throws ServletException, IOException {</p>
+    <p>&nbsp;</p>
+    <p>        response.setContentType(&quot;text/html&quot;);</p>
+    <p>        PrintWriter out = response.getWriter();</p>
+    <p>&nbsp;</p>
+    <p>        String name = request.getParameter(&quot;username&quot;);</p>
+    <p>        String pass = request.getParameter(&quot;password&quot;);</p>
+    <p>        HttpSession session = request.getSession();</p>
+    <p>        session.setAttribute(&quot;username&quot;, name);</p>
+    <p>&nbsp;</p>
+    <p>        out.println(&quot;&lt;h2&gt;Welcome, &quot; + name + &quot;!&lt;/h2&gt;&quot;);</p>
+    <p>        out.println(&quot;&lt;form action=&#x27;WelcomeServlet&#x27; method=&#x27;get&#x27;&gt;&quot;);</p>
+    <p>        out.println(&quot;&lt;input type=&#x27;submit&#x27; value=&#x27;Go to Next Page&#x27;&gt;&quot;);</p>
+    <p>        out.println(&quot;&lt;/form&gt;&quot;);</p>
+    <p>&nbsp;</p>
+    <p>        out.close();</p>
+    <p>    }}</p>
+    <p>WelcomeServlet:</p>
+    <p>package com.session;</p>
+    <p>&nbsp;</p>
+    <p>import java.io.*;</p>
+    <p>import javax.servlet.*;</p>
+    <p>import javax.servlet.annotation.WebServlet;</p>
+    <p>import javax.servlet.http.*;</p>
+    <p>&nbsp;</p>
+    <p>@WebServlet(&quot;/WelcomeServlet&quot;)</p>
+    <p>public class WelcomeServlet extends HttpServlet {</p>
+    <p>    @Override</p>
+    <p>    protected void doGet(HttpServletRequest request, HttpServletResponse response)</p>
+    <p>            throws ServletException, IOException </p>
+    <p>        response.setContentType(&quot;text/html&quot;);</p>
+    <p>        PrintWriter out = response.getWriter();</p>
+    <p>        HttpSession session = request.getSession(false);</p>
+    <p>&nbsp;</p>
+    <p>        if (session != null &amp;&amp; session.getAttribute(&quot;username&quot;) != null) {</p>
+    <p>            String name = (String) session.getAttribute(&quot;username&quot;);</p>
+    <p>            out.println(&quot;&lt;h2&gt;Hello again, &quot; + name + &quot;!&lt;/h2&gt;&quot;);</p>
+    <p>            out.println(&quot;&lt;form action=&#x27;LogoutServlet&#x27; method=&#x27;get&#x27;&gt;&quot;);</p>
+    <p>            out.println(&quot;&lt;input type=&#x27;submit&#x27; value=&#x27;Logout&#x27;&gt;&quot;);</p>
+    <p>            out.println(&quot;&lt;/form&gt;&quot;);</p>
+    <p>        } else {</p>
+    <p>            out.println(&quot;&lt;h2&gt;No active session found. Please login first.&lt;/h2&gt;&quot;);</p>
+    <p>            out.println(&quot;&lt;a href=&#x27;index.html&#x27;&gt;Go to Login Page&lt;/a&gt;&quot;);</p>
+    <p>        }</p>
+    <p>&nbsp;</p>
+    <p>        out.close();</p>
+    <p>    }   }</p>
+    <p>Output</p>
+    <p>&nbsp;</p>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week 7</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body class="week-content">
+    <h1>Week 7</h1>
+    <p>238W1A1290</p>
+    <p>Week-7</p>
+    <p>AIM:To develop a Java Servlet program that demonstrates the concept of cookies by creating, setting, and reading cookies from the client’s browser to maintain user-specific information across multiple requests.</p>
+    <p>Code:</p>
+    <p>&nbsp;</p>
+    <p>clearCookieServlet.java:</p>
+    <p>package com.example.cookies; import java.io.*;</p>
+    <p>import javax.servlet.*;</p>
+    <p>import javax.servlet.annotation.WebServlet; import javax.servlet.http.*; @WebServlet(&quot;/clear&quot;)</p>
+    <p>public class ClearCookieServlet extends HttpServlet { @Override</p>
+    <p>protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {</p>
+    <p>Cookie cookie = new Cookie(&quot;username&quot;, &quot;&quot;); cookie.setMaxAge(0);</p>
+    <p>cookie.setPath(request.getContextPath().isEmpty() ? &quot;/&quot; : request.getContextPath()); response.addCookie(cookie);</p>
+    <p>response.sendRedirect(request.getContextPath() + &quot;/&quot;);</p>
+    <p>}</p>
+    <p>}</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>readCookiesServlet.java: package com.example.cookies; import java.io.*;</p>
+    <p>import java.net.URLDecoder; import javax.servlet.*;</p>
+    <p>&nbsp;</p>
+    <p>import javax.servlet.annotation.WebServlet; import javax.servlet.http.*; @WebServlet(&quot;/read&quot;)</p>
+    <p>public class ReadCookieServlet extends HttpServlet { @Override</p>
+    <p>protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {</p>
+    <p>String username = null;</p>
+    <p>Cookie[] cookies = request.getCookies(); if (cookies != null) {</p>
+    <p>for (Cookie c : cookies) {</p>
+    <p>if (&quot;username&quot;.equals(c.getName())) {</p>
+    <p>username = URLDecoder.decode(c.getValue(), &quot;UTF-8&quot;); break;</p>
+    <p>}</p>
+    <p>}</p>
+    <p>}</p>
+    <p>response.setContentType(&quot;text/html;charset=UTF-8&quot;); try (PrintWriter out = response.getWriter()) {</p>
+    <p>out.println(&quot;&lt;html&gt;&lt;body&gt;&quot;); if (username != null) {</p>
+    <p>out.println(&quot;&lt;h3&gt;Found cookie! username = &quot; + username + &quot;&lt;/h3&gt;&quot;);</p>
+    <p>} else {</p>
+    <p>out.println(&quot;&lt;h3&gt;No &#x27;username&#x27; cookie found&lt;/h3&gt;&quot;);</p>
+    <p>}</p>
+    <p>out.println(&quot;&lt;p&gt;&lt;a href=\&quot;&quot; + request.getContextPath() + &quot;/\&quot;&gt;Back&lt;/a&gt;&lt;/p&gt;&quot;); out.println(&quot;&lt;/body&gt;&lt;/html&gt;&quot;);</p>
+    <p>}</p>
+    <p>}</p>
+    <p>@Override</p>
+    <p>protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {</p>
+    <p>&nbsp;</p>
+    <p>doGet(req, resp);</p>
+    <p>}</p>
+    <p>}</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>setCookieServlet.java:</p>
+    <p>package com.example.cookies; import java.io.*;</p>
+    <p>import java.net.URLEncoder; import javax.servlet.*;</p>
+    <p>import javax.servlet.annotation.WebServlet; import javax.servlet.http.*; @WebServlet(&quot;/set&quot;)</p>
+    <p>public class SetCookieServlet extends HttpServlet { @Override</p>
+    <p>protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {</p>
+    <p>String user = request.getParameter(&quot;username&quot;); if (user == null || user.trim().isEmpty()) {</p>
+    <p>user = &quot;Guest&quot;;</p>
+    <p>}</p>
+    <p>String value = URLEncoder.encode(user, &quot;UTF-8&quot;); Cookie cookie = new Cookie(&quot;username&quot;, value); cookie.setMaxAge(60 * 60 * 24);</p>
+    <p>cookie.setPath(request.getContextPath().isEmpty() ? &quot;/&quot; : request.getContextPath()); cookie.setHttpOnly(true);</p>
+    <p>// cookie.setSecure(true); response.addCookie(cookie); response.setContentType(&quot;text/html;charset=UTF-8&quot;); try (PrintWriter out = response.getWriter()) {</p>
+    <p>out.println(&quot;&lt;html&gt;&lt;body&gt;&quot;);</p>
+    <p>out.println(&quot;&lt;h3&gt;Cookie created for user: &quot; + user + &quot;&lt;/h3&gt;&quot;);</p>
+    <p>&nbsp;</p>
+    <p>out.println(&quot;&lt;p&gt;&lt;a href=\&quot;&quot; + request.getContextPath() + &quot;/read\&quot;&gt;Read cookie&lt;/a&gt;&lt;/p&gt;&quot;);</p>
+    <p>out.println(&quot;&lt;/body&gt;&lt;/html&gt;&quot;);</p>
+    <p>}</p>
+    <p>}</p>
+    <p>@Override</p>
+    <p>protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {</p>
+    <p>doGet(req, resp);</p>
+    <p>}</p>
+    <p>}</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>index.html:</p>
+    <p>&lt;!doctype html&gt;</p>
+    <p>&lt;html&gt;</p>
+    <p>&lt;head&gt;</p>
+    <p>&lt;meta charset=&quot;utf-8&quot; /&gt;</p>
+    <p>&lt;title&gt;CookieDemo&lt;/title&gt;</p>
+    <p>&lt;/head&gt;</p>
+    <p>&lt;body&gt;</p>
+    <p>&lt;h2&gt;Cookie demo&lt;/h2&gt;</p>
+    <p>&lt;form action=&quot;set&quot; method=&quot;get&quot;&gt; Name: &lt;input name=&quot;username&quot; /&gt;</p>
+    <p>&lt;button type=&quot;submit&quot;&gt;Set cookie&lt;/button&gt;</p>
+    <p>&lt;/form&gt;</p>
+    <p>&lt;p&gt;&lt;a href=&quot;read&quot;&gt;Read cookie&lt;/a&gt;&lt;/p&gt;</p>
+    <p>&lt;p&gt;&lt;a href=&quot;clear&quot;&gt;Clear cookie&lt;/a&gt;&lt;/p&gt;</p>
+    <p>&lt;/body&gt;</p>
+    <p>&lt;/html&gt;</p>
+    <p>Output:</p>
+</body>
+</html>

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Week 3</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body class="week-content">
+    <h1>Week 3</h1>
+    <p>238W1A1290</p>
+    <p>Date: 04-08-25</p>
+    <p>Week-3</p>
+    <p>AIM: JDBC-MYSQL CONNECTION</p>
+    <p>Procedure:</p>
+    <p> Click the category as java and in projects java application and click on next.</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>Enter file name and click finish now your file is setup is completed.</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>Open mysql server and create a database welcome. After creation of database, change the database into welcome database. Insert the table with data of some students and run the server.</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>After running of the mysql server and return to the project mysql1 ,run the program and the output is displayed which are added in the table.</p>
+    <p>&nbsp;</p>
+    <p>Source code:</p>
+    <p>package mysql;</p>
+    <p>import java.sql.*;</p>
+    <p>import java.util.*;</p>
+    <p>&nbsp;</p>
+    <p>public class MySql {</p>
+    <p>    public static void main(String[] args) {</p>
+    <p>        try{</p>
+    <p>            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);  </p>
+    <p>            Connection con=DriverManager.getConnection(&quot;jdbc:mysql://localhost:3306/it&quot;,&quot;root&quot;,&quot;&quot;);  </p>
+    <p>            Statement st=con.createStatement();</p>
+    <p>            //int insert = st.executeUpdate(&quot;insert into employee values(105,&#x27;Manoj&#x27;)&quot;);</p>
+    <p>            ResultSet rs=st.executeQuery(&quot;select * from employee&quot;);  </p>
+    <p>            while(rs.next())  </p>
+    <p>                System.out.println(rs.getInt(1)+&quot;  &quot;+rs.getString(2));  </p>
+    <p>            con.close();  </p>
+    <p>        }</p>
+    <p>        catch(Exception e){ </p>
+    <p>            System.out.println(e);</p>
+    <p>        }  </p>
+    <p>    }</p>
+    <p>}</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>Source code:</p>
+    <p>&nbsp;</p>
+    <p>package mysql;</p>
+    <p>&nbsp;</p>
+    <p>import java.sql.*;</p>
+    <p>import java.util.*;</p>
+    <p>&nbsp;</p>
+    <p>public class MySql {</p>
+    <p>&nbsp;</p>
+    <p>    public static void main(String[] args) {</p>
+    <p>&nbsp;</p>
+    <p>        try{</p>
+    <p>            Class.forName(&quot;com.mysql.jdbc.Driver&quot;);  </p>
+    <p>            Connection con=DriverManager.getConnection(&quot;jdbc:mysql://10.0.9.22:3306/mysqldbcon&quot;,&quot;root&quot;,&quot;&quot;);  </p>
+    <p>            Statement st=con.createStatement();</p>
+    <p>            //int insert = st.executeUpdate(&quot;insert into employee values(105,&#x27;Manoj&#x27;)&quot;);</p>
+    <p>            ResultSet rs=st.executeQuery(&quot;select * from stu&quot;);  </p>
+    <p>            while(rs.next())  </p>
+    <p>                System.out.println(rs.getInt(1)+&quot;  &quot;+rs.getString(2));  </p>
+    <p>            con.close(); </p>
+    <p>catch(Exception e){ </p>
+    <p>System.out.println(e);</p>
+    <p>        }}}</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+</body>
+</html>
